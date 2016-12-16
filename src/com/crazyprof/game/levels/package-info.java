@@ -5,4 +5,4 @@
  * @author E
  *
  */
-package com.crazyprof.game;
+package com.crazyprof.game.levels;

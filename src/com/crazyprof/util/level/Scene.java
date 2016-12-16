@@ -1,10 +1,12 @@
 package com.crazyprof.util.level;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.crazyprof.entity.Entity;
+import com.crazyprof.rendering.SceneCore;
 
-public class Scene {
+public class Scene extends SceneCore{
 	
 	public static String[] sceneNames;
 	public int numberOfScenes;
@@ -25,6 +27,15 @@ public class Scene {
 		this.entities =  new ArrayList<Entity>(entities);
 		System.out.println("Scene: " + name + " has been loaded.");
 	}
+	
+	public Scene(String name){
+		lastScene = this;
+		numberOfScenes++;
+		sceneName = name;
+		System.out.println("Scene: " + name + " has been loaded.");
+	}
+	
+	
 	
 	public String getName(){
 		return sceneName;
