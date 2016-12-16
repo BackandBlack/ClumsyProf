@@ -1,0 +1,22 @@
+*************************TODO*************************
+//Wants are for other people to take care of.
+//Add - something you are adding
+//Fix - something already implemented but needs work
+//Sub - something that needs gotten rid of
+
+
+Wants:
+
+
+
+EVON TODO_____________________________________________
+Add Debug
+Add Exception Handling 
+Add Physics
+Add Sound
+
+
+
+
+
+MASON TODO____________________________________________

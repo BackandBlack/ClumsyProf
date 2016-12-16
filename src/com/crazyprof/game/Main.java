@@ -1,45 +1,75 @@
 package com.crazyprof.game;
 
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-import com.crazyprof.entity.Camera;
+import com.crazyprof.game.globals.GlobalMeshs;
+import com.crazyprof.game.globals.GlobalTextures;
 import com.crazyprof.game.levels.IntroLevel;
+import com.crazyprof.game.scenes.SceneAlpha;
 import com.crazyprof.rendering.Display;
-import com.crazyprof.rendering.LevelTemplate;
-import com.crazyprof.rendering.RenderContext;
 import com.crazyprof.rendering.Renderer;
-import com.crazyprof.rendering.SceneTemplate;
-import com.crazyprof.util.Bitmap;
-import com.crazyprof.util.Mesh;
-import com.crazyprof.util.Transform;
+import com.crazyprof.rendering.SceneCore;
 import com.crazyprof.util.level.Level;
 import com.crazyprof.util.level.LevelManager;
 import com.crazyprof.util.level.Scene;
-import com.crazyprof.util.math.Matrix4f;
-import com.crazyprof.util.math.Quaternion;
-import com.crazyprof.util.math.Vector4f;
 
-import jdk.nashorn.internal.ir.WhileNode;
-
-/**
- * The sole purpose of this class is to hold the main method.
- *
- * Any other use should be placed in a separate class
- */
 public class Main
 {
-	// Lazy exception handling here. You can do something more interesting 
-	// depending on what you're doing
+	public static Display display;
+
 	public static void main(String[] args) throws IOException
 	{
-		// Define Levels(made up of scene classes)
+		/*
+		 * This you must load the Meshes and Textures from the
+		 * GlobalMeshs and Global Texture Classes. This will result
+		 * in an error if not done. (NULL POINTER EXCEPTION in the 
+		 * Renderer Class at renderalbleEntities)
+		 * 
+		 */
+		GlobalMeshs.load();
+		GlobalTextures.load();
+		
+		/*
+		 * This is where you put the constructor for your levels.
+		 * This must be done after the Globals are loaded so the 
+		 * meshes can be initialized and loaded. After constructing
+		 * the levels, you need to Init() the levels.
+		 * 
+		 */
 		IntroLevel introLevel = new IntroLevel();
 		introLevel.Init();
 		
-		//Here to update game and scenes
+		/*
+		 * This is where the Level Manager is constructed and started.
+		 * You must add your level to the level Array in chronological
+		 * order so the manager can run them in order.
+		 * 
+		 */
+		Level levels[] = {IntroLevel.introLevel};
+		LevelManager levelManager = new LevelManager(levels);
+		levelManager.start();
+		
+		/*
+		 * The Display must be created before the renderer bacause I can't
+		 * Code. Sorry...
+		 */
+		display = new Display(800, 600, Level.getCurrentLevel().getName());
+		
+		/*
+		 * Just construct the renderer here and forget about it.
+		 */
+		Renderer renderer = new Renderer();
+				
+		/*
+		 * In the while loop update the level manager and update the current
+		 * scene but accessing it from the current level.
+		 * 
+		 */
 		while(true){
-			LevelTemplate.runnables.get(0);
+			levelManager.update();
+			Level.currentLevel.scenes[Scene.currentSceneNum].Update();
+//			introLevel.getSceneAlpha().Upda;
+//			sceneAlpha.Update();
 		}
 	}
 }

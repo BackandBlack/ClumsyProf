@@ -11,11 +11,19 @@ public class Entity {
 	private Mesh mesh;
 	private Bitmap bitmap;
 	private Transform transform;
+	private String name;
 	
 	public Entity(Mesh mesh, Bitmap texture, Transform transform) throws IOException{
 		this.mesh = mesh;
 		bitmap = texture;
 		this.transform = transform;
+	}
+	
+	public Entity(Mesh mesh, Bitmap texture, Transform transform, String name) throws IOException{
+		this.mesh = mesh;
+		bitmap = texture;
+		this.transform = transform;
+		this.name = name;
 	}
 
 	public Mesh getMesh() {
@@ -28,5 +36,9 @@ public class Entity {
 
 	public Bitmap getTexture() {
 		return bitmap;
+	}
+	
+	public String getName(){
+		return name;
 	}
 }

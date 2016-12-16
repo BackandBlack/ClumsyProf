@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.crazyprof.entity.Entity;
-import com.crazyprof.rendering.SceneTemplate;
+import com.crazyprof.rendering.SceneCore;
 
-public class Scene {
+public class Scene extends SceneCore{
 	
 	public static String[] sceneNames;
 	public int numberOfScenes;
