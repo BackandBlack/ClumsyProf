@@ -60,32 +60,42 @@ public class Bitmap
 
 	public Bitmap(String fileName) throws IOException
 	{
-		int width = 0;
-		int height = 0;
-		byte[] components = null;
+		if(fileName.endsWith(".jpg")){
+			int width = 0;
+			int height = 0;
+			byte[] components = null;
 
-		BufferedImage image = ImageIO.read(new File(fileName));
+			BufferedImage image = ImageIO.read(new File(fileName));
 
-		width = image.getWidth();
-		height = image.getHeight();
+			width = image.getWidth();
+			height = image.getHeight();
 
-		int imgPixels[] = new int[width * height];
-		image.getRGB(0, 0, width, height, imgPixels, 0, width);
-		components = new byte[width * height * 4];
+			int imgPixels[] = new int[width * height];
+			image.getRGB(0, 0, width, height, imgPixels, 0, width);
+			components = new byte[width * height * 4];
 
-		for(int i = 0; i < width * height; i++)
-		{
-			int pixel = imgPixels[i];
+			for(int i = 0; i < width * height; i++)
+			{
+				int pixel = imgPixels[i];
 
-			components[i * 4]     = (byte)((pixel >> 24) & 0xFF); // A
-			components[i * 4 + 1] = (byte)((pixel      ) & 0xFF); // B
-			components[i * 4 + 2] = (byte)((pixel >> 8 ) & 0xFF); // G
-			components[i * 4 + 3] = (byte)((pixel >> 16) & 0xFF); // R
+				components[i * 4]     = (byte)((pixel >> 24) & 0xFF); // A
+				components[i * 4 + 1] = (byte)((pixel      ) & 0xFF); // B
+				components[i * 4 + 2] = (byte)((pixel >> 8 ) & 0xFF); // G
+				components[i * 4 + 3] = (byte)((pixel >> 16) & 0xFF); // R
+			}
+
+			m_width = width;
+			m_height = height;
+			m_components = components;
+		}else if(fileName.endsWith(".png")){
+			m_width = 0;
+			m_height = 0;
+			m_components = null;
+		}else{
+			m_width = 0;
+			m_height = 0;
+			m_components = null;
 		}
-
-		m_width = width;
-		m_height = height;
-		m_components = components;
 	}
 
 	/**
