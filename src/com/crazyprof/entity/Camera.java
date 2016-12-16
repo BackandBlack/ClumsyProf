@@ -5,6 +5,8 @@ import com.crazyprof.util.math.Vector4f;
 import com.crazyprof.util.math.Matrix4f;
 import com.crazyprof.util.math.Quaternion;
 import com.crazyprof.util.Transform;
+import com.crazyprof.util.level.Level;
+import com.crazyprof.util.level.Scene;
 import com.crazyprof.util.Input;
 
 public class Camera
@@ -62,6 +64,11 @@ public class Camera
 			Rotate(GetTransform().GetRot().GetRight(), sensitivityY);
 		if(input.GetKey(KeyEvent.VK_UP))
 			Rotate(GetTransform().GetRot().GetRight(), -sensitivityY);
+		
+		if(input.GetKey(KeyEvent.VK_Q)){
+			if(!Level.getCurrentLevel().scenes[Scene.currentSceneNum].isLastScene)
+				Level.getCurrentLevel().scenes[Scene.currentSceneNum].setSceneComplete(true);
+		}
 	}
 
 	private void Move(Vector4f dir, float amt)

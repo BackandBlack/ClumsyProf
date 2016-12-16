@@ -9,11 +9,12 @@ import com.crazyprof.util.Mesh;
 import com.crazyprof.util.Transform;
 import com.crazyprof.util.level.Level;
 import com.crazyprof.util.level.Scene;
+import com.crazyprof.util.math.Matrix4f;
 import com.crazyprof.util.math.Vector4f;
 
 public class Mustafar {
 	
-	static ArrayList<Entity> labEntities = new ArrayList<Entity>();
+	public static ArrayList<Entity> labEntities = new ArrayList<Entity>();
 	static Mesh monkeyMesh;
 	static Bitmap monkeyTexture;
 	static Transform monkeyTransform;
@@ -36,7 +37,6 @@ public class Mustafar {
 	}
 	
 	public void close(){
-		
+		labEntities = null;
 	}
-
 }

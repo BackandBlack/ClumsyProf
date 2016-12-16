@@ -1,5 +1,6 @@
 package com.crazyprof.game;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import com.crazyprof.entity.Camera;
@@ -28,7 +29,8 @@ public class Main
 	{
 		Mustafar.Init();
 		Scene lab = new Scene("Lab", Mustafar.labEntities);
-		Scene scenesForLevel1[] = {lab};
+		Scene space = new Scene("Space", Space.spaceEntities);
+		Scene scenesForLevel1[] = {lab, space};
 		Level level1 = new Level(0, "Mustafar", scenesForLevel1);
 		Level levels[] = {level1};
 		
@@ -92,7 +94,7 @@ public class Main
 //			}
 //		}
 		
-		Display display = new Display(800, 600, "Level 1");
+		Display display = new Display(800, 600, Level.getCurrentLevel().getName());
 		RenderContext target = display.GetFrameBuffer();
 		Camera camera = new Camera(new Matrix4f().InitPerspective((float)Math.toRadians(70.0f),
 			   	(float)target.GetWidth()/(float)target.GetHeight(), 0.1f, 1000.0f));
@@ -101,6 +103,7 @@ public class Main
 		long previousTime = System.nanoTime();
 		while(true)
 		{
+			
 			long currentTime = System.nanoTime();
 			float delta = (float)((currentTime - previousTime)/1000000000.0);
 			previousTime = currentTime;
@@ -112,10 +115,15 @@ public class Main
 
 			target.Clear((byte)0x00);
 			target.ClearDepthBuffer();
-//			levels.Draw(target, vp,.GetTransformation(), texture2);
+//			monkey.Draw(target, vp,.GetTransformation(), texture2);
+			Mustafar.labEntities.get(0).getMesh().Draw(target, vp, 
+											Mustafar.labEntities.get(0).getTransform().GetTransformation(), 
+											Mustafar.labEntities.get(0).getTexture());
+			
 //			terrainMesh.Draw(target, vp, terrainTransform.GetTransformation(), texture);
 
 			display.SwapBuffers();
+			levelManager.update();
 		}
 		
 		

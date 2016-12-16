@@ -25,8 +25,13 @@ public class LevelManager {
 	public void update(){
 		sceneManager.update();
 		if(levels[Level.currentLevelNum].isLevelCompleted && !levels[Level.currentLevelNum].isLastLevel){
+			cleanUp();
 			load(levels[++Level.currentLevelNum]);getClass();
 			sceneManager.start();
 		}
+	}
+	
+	public void cleanUp(){
+		levels[Level.currentLevelNum] = null;
 	}
 }

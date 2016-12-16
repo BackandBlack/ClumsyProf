@@ -23,11 +23,9 @@ public class SceneManager {
 	}
 	
 	public void update(){
-//		System.out.println("current scene number: " + Scene.currentSceneNum);
-//		System.out.println("current scene completed: " + scenes[Scene.currentSceneNum].isSceneCompleted);
-		
 		if(scenes[Scene.currentSceneNum].isSceneCompleted){
 			if(!scenes[Scene.currentSceneNum].isLastScene){
+				cleanUp();
 				load(scenes[++Scene.currentSceneNum]);
 			}else {
 				if(Level.currentLevelNum != Level.numberOfLevels){
@@ -37,6 +35,11 @@ public class SceneManager {
 				}
 			}
 		}
+	}
+	
+	public void cleanUp(){
+		
+		scenes[Scene.currentSceneNum] = null;
 	}
 	
 }

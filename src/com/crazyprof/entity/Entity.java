@@ -18,4 +18,15 @@ public class Entity {
 		this.transform = transform;
 	}
 
+	public Mesh getMesh() {
+		return mesh;
+	}
+	
+	public Transform getTransform(){
+		return transform;
+	}
+
+	public Bitmap getTexture() {
+		return bitmap;
+	}
 }
