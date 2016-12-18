@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.crazyprof.game.globals.GlobalMeshs;
 import com.crazyprof.game.globals.GlobalTextures;
 import com.crazyprof.game.levels.IntroLevel;
+import com.crazyprof.game.levels.Naboo;
 import com.crazyprof.game.scenes.SceneAlpha;
 import com.crazyprof.rendering.Display;
 import com.crazyprof.rendering.Renderer;
@@ -36,8 +37,8 @@ public class Main
 		 * the levels, you need to Init() the levels.
 		 * 
 		 */
-		IntroLevel introLevel = new IntroLevel();
-		introLevel.Init();
+		Naboo naboo = new Naboo();
+		naboo.Init();
 		
 		/*
 		 * This is where the Level Manager is constructed and started.
@@ -45,7 +46,7 @@ public class Main
 		 * order so the manager can run them in order.
 		 * 
 		 */
-		Level levels[] = {IntroLevel.introLevel};
+		Level levels[] = {Naboo.naboo};
 		LevelManager levelManager = new LevelManager(levels);
 		levelManager.start();
 		
@@ -70,6 +71,7 @@ public class Main
 			Level.currentLevel.scenes[Scene.currentSceneNum].Update();
 //			introLevel.getSceneAlpha().Upda;
 //			sceneAlpha.Update();
+			
 		}
 	}
 }

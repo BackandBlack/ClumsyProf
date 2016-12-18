@@ -3,6 +3,9 @@ package com.crazyprof.util.level;
 public class SceneManager {
 
 	Scene scenes[];
+	static int currentSceneNum = 0;
+	static Scene currentScene;
+	static Scene lastScene;
 	
 	public SceneManager(){
 	
@@ -10,26 +13,28 @@ public class SceneManager {
 	
 	public SceneManager(Scene scenes[]){
 		this.scenes = scenes;
+		lastScene = scenes[scenes.length-1];
 	}
 	
 	public void start(){
 		SceneLoader.load(scenes[0]);
-		Scene.currentSceneNum = 0;
+		currentSceneNum = 0;
 	}
 	
 	public void load(Scene scene){
 		SceneLoader.load(scene);
-		Scene.setCurrentScene(scene);
+		setCurrentScene(scene);
 	}
 	
 	public void update(){
-		if(scenes[Scene.currentSceneNum].isSceneCompleted){
-			if(!scenes[Scene.currentSceneNum].isLastScene){
+		if(scenes[currentSceneNum].isSceneCompleted){
+			if(!scenes[currentSceneNum].isLastScene){
 				cleanUp();
-				load(scenes[++Scene.currentSceneNum]);
+				load(scenes[++currentSceneNum]);
 			}else {
-				if(Level.currentLevelNum != Level.numberOfLevels){
-					Level.currentLevel.setLevelComplete(true);
+				//LevelManager.levels.length-1 gets number of levels
+				if(LevelManager.currentLevelNum != LevelManager.levels.length-1){
+					LevelManager.currentLevel.setLevelComplete(true);
 				}else{
 					System.out.println("End of Game.");
 				}
@@ -38,8 +43,15 @@ public class SceneManager {
 	}
 	
 	public void cleanUp(){
-		
-		scenes[Scene.currentSceneNum] = null;
+		scenes[currentSceneNum] = null;
+	}
+	
+	public static void setCurrentScene(Scene scene){
+		currentScene = scene;
+	}
+	
+	public static Scene getCurrentScene(){
+		return currentScene;
 	}
 	
 }

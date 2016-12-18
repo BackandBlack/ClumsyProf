@@ -31,4 +31,16 @@ public class IntroLevel implements LevelTemplate{
 		return S_Alpha;
 	}
 
+	@Override
+	public Scene getScene(int sceneNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void CleanUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

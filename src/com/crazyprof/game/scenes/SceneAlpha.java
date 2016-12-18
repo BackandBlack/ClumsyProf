@@ -1,16 +1,23 @@
 package com.crazyprof.game.scenes;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.crazyprof.entity.Entity;
 import com.crazyprof.game.globals.GlobalMeshs;
 import com.crazyprof.game.globals.GlobalTextures;
 import com.crazyprof.rendering.SceneCore;
 import com.crazyprof.util.Transform;
+import com.crazyprof.util.level.Scene;
 import com.crazyprof.util.math.Vector4f;
 
-public class SceneAlpha extends SceneCore{
+public class SceneAlpha extends Scene{
 	
+	public SceneAlpha(String name, ArrayList<Entity> entities) {
+		super(name, entities);
+	}
+
+
 	int next = 5;
 
 
@@ -34,6 +41,13 @@ public class SceneAlpha extends SceneCore{
 
 	@Override
 	public void Close() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void Kill() {
 		// TODO Auto-generated method stub
 		
 	}
