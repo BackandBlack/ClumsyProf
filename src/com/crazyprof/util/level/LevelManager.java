@@ -1,5 +1,7 @@
 package com.crazyprof.util.level;
 
+import java.io.IOException;
+
 public class LevelManager {
 	
 	SceneManager sceneManager;
@@ -30,7 +32,12 @@ public class LevelManager {
 		sceneManager.update();
 		if(levels[currentLevelNum].isLevelCompleted && !levels[currentLevelNum].isLastLevel){
 			cleanUp();
-			load(levels[++currentLevelNum]);
+			try {
+				levels[++currentLevelNum].init();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			load(levels[currentLevelNum]);
 			sceneManager.start();
 		}
 	}

@@ -1,9 +1,11 @@
 package com.crazyprof.util.level;
 
+import com.crazyprof.rendering.Renderer;
+
 public class SceneManager {
 
 	Scene scenes[];
-	static int currentSceneNum = 0;
+	public static int currentSceneNum = 0;
 	static Scene currentScene;
 	static Scene lastScene;
 	
@@ -37,6 +39,7 @@ public class SceneManager {
 					LevelManager.currentLevel.setLevelComplete(true);
 				}else{
 					System.out.println("End of Game.");
+					LevelManager.currentLevel.setLevelComplete(true);
 				}
 			}
 		}
@@ -44,6 +47,7 @@ public class SceneManager {
 	
 	public void cleanUp(){
 		scenes[currentSceneNum] = null;
+		Renderer.CleanUp();
 	}
 	
 	public static void setCurrentScene(Scene scene){

@@ -13,12 +13,6 @@ public abstract class Scene {
 	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
 	
-	public Scene(String name, ArrayList<Entity> entities){
-		sceneName = name;
-		this.entities =  new ArrayList<Entity>(entities);
-		System.out.println("Scene: " + name + " has been added to the queue.");
-	}
-	
 	public Scene(String name){
 		sceneName = name;
 		System.out.println("Scene: " + name + " has been added to the queue.");
@@ -26,21 +20,17 @@ public abstract class Scene {
 	
 	public abstract void init() throws IOException;
 	
-//	public static void load(Entity[] entities){
-//		Renderer.Load(entities);
-//	}
-//	
-//	public void update(){
-//		Render();
-//	}
-//	
-//	public static void render(){
-//		Renderer.Render();
-//	}
-//	
-//	public void close(){
-//		Renderer.CleanUp();
-//	}
+	public static void load(Entity[] entities){
+		Renderer.Load(entities);
+	}
+	
+	public void update(){
+		Renderer.Render();
+	}
+	
+	public void close(){
+		Renderer.CleanUp();
+	}
 	
 	public String getName(){
 		return sceneName;

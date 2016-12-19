@@ -8,8 +8,10 @@ public abstract class Level {
 	public boolean isLastLevel = false;
 	String levelName;
 	public Scene scenes[];
+	private int levelNumber;
 	
 	public Level(int level, String name, Scene scenes[]){
+		levelNumber = level;
 		levelName = name;
 		scenes[scenes.length-1].setLastScene(true);
 		this.scenes = scenes;
@@ -43,6 +45,10 @@ public abstract class Level {
 	
 	public String getName(){
 		return levelName;
+	}
+	
+	public int getLevelNumber(){
+		return levelNumber;
 	}
 	
 	public void setLevelComplete(boolean bool){
