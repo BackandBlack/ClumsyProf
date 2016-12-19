@@ -20,8 +20,8 @@ public class GlobalTextures {
 	
 	public static void load() throws IOException{
 		
-		monkeyTexture = new Bitmap("./res/bricks2_normal.jpg");
-		monkeyTexture = new Bitmap("./res/bricks.jpg");
+		monkeyTexture = new Bitmap("./res/bricks2.jpg");
+		monkeyTexture2 = new Bitmap("./res/bricks.jpg");
 		
 	}
 

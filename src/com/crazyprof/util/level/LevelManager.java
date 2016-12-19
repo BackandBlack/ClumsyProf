@@ -1,13 +1,19 @@
 package com.crazyprof.util.level;
 
+import java.io.IOException;
+
 public class LevelManager {
 	
 	SceneManager sceneManager;
-	
+	static int currentLevelNum = 0;
+	static Level currentLevel;
+	static Level lastLevel;
 	static Level levels[];
 	
 	public LevelManager(Level levels[]){
 		LevelManager.levels = levels;
+		lastLevel = levels[levels.length-1];
+		lastLevel.setLastLevel(true);
 	}
 	
 	public void start(){
@@ -19,19 +25,32 @@ public class LevelManager {
 		sceneManager = null;
 		sceneManager = new SceneManager(level.scenes);
 		LevelLoader.load(level);
-		Level.setCurrentLevel(level);
+		setCurrentLevel(level);
 	}
 	
 	public void update(){
 		sceneManager.update();
-		if(levels[Level.currentLevelNum].isLevelCompleted && !levels[Level.currentLevelNum].isLastLevel){
+		if(levels[currentLevelNum].isLevelCompleted && !levels[currentLevelNum].isLastLevel){
 			cleanUp();
-			load(levels[++Level.currentLevelNum]);getClass();
+			try {
+				levels[++currentLevelNum].init();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			load(levels[currentLevelNum]);
 			sceneManager.start();
 		}
 	}
 	
 	public void cleanUp(){
-		levels[Level.currentLevelNum] = null;
+		levels[currentLevelNum] = null;
+	}
+	
+	public static void setCurrentLevel(Level level){
+		currentLevel = level;
+	}
+	
+	public static Level getCurrentLevel(){
+		return currentLevel;
 	}
 }

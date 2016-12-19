@@ -9,7 +9,7 @@ import com.crazyprof.util.math.Matrix4f;
 
 public class Renderer {
 	
-	public static Entity[] renderableEntities;
+	public static Entity[] allEntities;
 	
 	float rotCounter = 0.0f;
 	static long previousTime = System.nanoTime();
@@ -23,7 +23,7 @@ public class Renderer {
 	}
 	
 	public static void Load(Entity[] entities){
-		renderableEntities = entities;
+		allEntities = entities;
 	}
 	
 	public static void Render(){
@@ -36,16 +36,17 @@ public class Renderer {
 
 		target.Clear((byte)0x00);
 		target.ClearDepthBuffer();
-
-		for(int i=0;i<renderableEntities.length; i++){
-			renderableEntities[i].getMesh().Draw(target, vp, renderableEntities[i].getTransform().GetTransformation(), renderableEntities[i].getTexture());
+		if (allEntities.length > 0){
+			for(int i=0;i<allEntities.length; i++){
+				allEntities[i].getMesh().Draw(target, vp, allEntities[i].getTransform().GetTransformation(), allEntities[i].getTexture());
+			}
 		}
 
 		Main.display.SwapBuffers();
 	}
 
 	public static void CleanUp() {
-		
+		allEntities = null;
 	}
 
 }

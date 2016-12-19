@@ -5,13 +5,14 @@ import java.io.IOException;
 import com.crazyprof.game.globals.GlobalMeshs;
 import com.crazyprof.game.globals.GlobalTextures;
 import com.crazyprof.game.levels.IntroLevel;
+import com.crazyprof.game.levels.Naboo;
 import com.crazyprof.game.scenes.SceneAlpha;
 import com.crazyprof.rendering.Display;
 import com.crazyprof.rendering.Renderer;
-import com.crazyprof.rendering.SceneCore;
 import com.crazyprof.util.level.Level;
 import com.crazyprof.util.level.LevelManager;
 import com.crazyprof.util.level.Scene;
+import com.crazyprof.util.level.SceneManager;
 
 public class Main
 {
@@ -36,8 +37,9 @@ public class Main
 		 * the levels, you need to Init() the levels.
 		 * 
 		 */
+		Naboo naboo = new Naboo();
+		naboo.init();
 		IntroLevel introLevel = new IntroLevel();
-		introLevel.Init();
 		
 		/*
 		 * This is where the Level Manager is constructed and started.
@@ -45,7 +47,7 @@ public class Main
 		 * order so the manager can run them in order.
 		 * 
 		 */
-		Level levels[] = {IntroLevel.introLevel};
+		Level levels[] = {naboo, introLevel};
 		LevelManager levelManager = new LevelManager(levels);
 		levelManager.start();
 		
@@ -53,7 +55,7 @@ public class Main
 		 * The Display must be created before the renderer bacause I can't
 		 * Code. Sorry...
 		 */
-		display = new Display(800, 600, Level.getCurrentLevel().getName());
+		display = new Display(800, 600, LevelManager.getCurrentLevel().getName());
 		
 		/*
 		 * Just construct the renderer here and forget about it.
@@ -67,9 +69,14 @@ public class Main
 		 */
 		while(true){
 			levelManager.update();
-			Level.currentLevel.scenes[Scene.currentSceneNum].Update();
+			LevelManager.getCurrentLevel().scenes[SceneManager.currentSceneNum].update();
 //			introLevel.getSceneAlpha().Upda;
 //			sceneAlpha.Update();
+			if(LevelManager.getCurrentLevel().isLastLevel && LevelManager.getCurrentLevel().isLevelCompleted){
+				break;
+			}
 		}
+		
+		
 	}
 }
